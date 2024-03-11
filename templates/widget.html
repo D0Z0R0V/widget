@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись на прием</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <h1>Запись на прием</h1>
+        <form action="{{ url_for('widget') }}" method="POST">
+            <div class="form-group">
+                <label for="surname">Фамилия*</label>
+                <input type="text" id="surname" name="surname" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Имя*</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="patronymic">Отчество*</label>
+                <input type="text" id="patronymic" name="patronymic" required>
+            </div>
+            <div class="form-group">
+                <label for="data_apreensao">День рождения*</label>
+                <input type="date" id="data_apreensao" name="data_apreensao" class="datepicker">
+            </div>
+            <div class="form-group">
+                <label for="petname">Имя питомца*</label>
+                <input type="text" id="petname" name="petname" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Телефон*</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="type_pet">Вид животного*</label>
+                <select id="type_pet" name="type_pet" value="{{ type_pet }}" required>
+                    {% for curr in context.type_pet %}
+                        <option value="{{curr}}" {% if context.type_pet == curr %}selected{% endif %}>{{ curr }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="type_service">Тип услуги*</label>
+                <select id="type_service" name="type_service" value="{{ type_service }}" required>
+                    {% for curr in context.type_service %}
+                        <option value="{{curr}}" {% if context.type_service == curr %}selected{% endif %}>{{curr}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name_doctor">Доктор*</label>
+                <select id="name_doctor" name="name_doctor" value="{{ name_doctor }}" required>
+                    {% for curr in context.name_doctor%}
+                        <option value="{{curr}}" {% if context.name_doctor == curr %}selected{% endif %}>{{ curr }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="data_apreensao">День записи*</label>
+                <input type="date" id="data_apreensao" name="data_apreensao" class="datepicker">
+            </div>
+            <div class="form-group">
+                <label for="time_doctor">Время записи*</label>
+                <select id="time_doctor " name="time_doctor" value="{{ time_doctor }}" required>
+                    {% for curr in context.time_doctor%}
+                        <option value="{{curr}}" {% if context.time_doctor == curr %}selected{% endif %}>{{ curr }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">Записаться на прием</button>
+            </div>
+        </form>
+        <div class="close-button">
+            <a href="/">Закрыть</a>
+        </div>
+    </div>
+</body>
+</html>
