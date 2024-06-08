@@ -434,7 +434,7 @@ def process_json_and_store(data, db_file):
     conn.close()
 
 
-@app.route('/webhook/1cTurtleobmen', methods=['POST', 'GET'])
+@app.route('/Turtleobmen', methods=['POST', 'GET'])
 def process_data_route():
     conn = get_db_connection()
     cursor = conn.cursor()
