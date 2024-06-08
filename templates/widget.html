@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись на прием</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <!--{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flashed-messages">
+            {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %} -->
+    <div class="container">
+        <h1>Запись на прием</h1>
+        <form action="{{ url_for('widget') }}" method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <label for="surname">Фамилия*</label>
+                <input type="text" id="surname" name="surname" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Имя*</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="patronymic">Отчество*</label>
+                <input type="text" id="patronymic" name="patronymic" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Телефон*</label>
+                <input type="tel" id="phone" name="phone" required placeholder="+7XXXXXXXXXX" >
+            </div>
+            <div class="form-group">
+                <label for="birthday">День рождения питомца*</label>
+                <input type="date" id="birthday" name="birthday" class="datepicker" required>
+            </div>
+            <div class="form-group">
+                <label for="petname">Имя питомца*</label>
+                <input type="text" id="petname" name="petname" required>
+            </div>
+            <div class="form-group">
+                <label for="type_pet">Вид питомца*</label>
+                <select id="type_pet" name="type_pet" required>
+                    {% for pet in pets %}
+                        <option value="{{ pet }}">{{ pet }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="doctor">Доктор*</label>
+                <select name="doctor" id="doctor" class="selectpicker show-tick" data-live-search="true" required>
+                    {% for doctor in doctors %}
+                    <option value="{{ doctor.doctor_id }}" {% if loop.first %} selected {% endif %} data-start="{{ doctor.start_date_time }}" data-end="{{ doctor.end_date_time }}">
+                        {{ doctor.full_name_doc }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="type_service">Тип услуги*</label>
+                <select id="type_service" name="type_service" required>
+                    {% for service in services %}
+                        <option value="{{ service.id }}">{{ service.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>  
+            <div class="form-group">
+                <label for="date">Дата записи*</label>
+                <select id="date" name="date" required>
+                    {% for slot in free_slots %}
+                        <option value="{{ slot['date'] }}">{{ slot['date'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="time">Время записи*</label>
+                <select id="time" name="time" required>
+                    <option value="">Выберите время</option>
+                </select>
+            </div>                                                 
+            <div class="form-group">
+                <button type="submit">Записаться на прием</button>
+            </div>
+        </form>
+        <div class="close-button">
+            <a href="#">Закрыть</a>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename="route.js") }}"></script>
+</body>
+</html>
